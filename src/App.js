@@ -4,7 +4,7 @@ import Home from './containers/Home'
 
 
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       <Navbar />
@@ -12,5 +12,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
