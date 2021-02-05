@@ -11,13 +11,14 @@ const Form = () => {
     dni: "",
   });
 
-  console.log(paises)
+ 
   // const [error, setError] = useState(false);
 
   useEffect(() => {
     let url = "https://restcountries.eu/rest/v2/all";
     axios.get(url).then((response) => {
       setPaises(response.data);
+      console.log(response)
     });
   }, []);
 
@@ -29,7 +30,7 @@ const Form = () => {
       [e.target.value]: e.target.value,
     });
   }
-
+  console.log(values)
   function handleSubmit(event) {
     event.preventDefault();
   }
