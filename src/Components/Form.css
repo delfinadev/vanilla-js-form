@@ -1,5 +1,28 @@
 form{
-    background-color: #F3F3F4;
     width: 100%;
     height: 400px;
+    padding-top: 43px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-content: space-around;
+}
+
+.column-one, .column-two{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    
+}
+
+.label-pais{
+    margin-top: 25px;
+}
+
+input{
+    width: 90%;
+}
+
+button{
+    align-self: flex-end;
 }
