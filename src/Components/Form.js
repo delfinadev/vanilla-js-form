@@ -37,14 +37,25 @@ const Form = () => {
       dni.trim() === ""
     ) {
       setError(true);
-      swal("Error!", "Todos los campos son necesarios", "error");
+      swal({
+        title: "Error!",
+        text: "Todos los campos son necesarios",
+        icon: "error",
+        button: "Finalizar",
+      });
 
       return; //asi no se sigue ejecutando el form ya que hay error
     }
 
     //Eliminar el error
     setError(false);
-    swal("Enviado!", "El fromulario se envio con exito", "success");
+
+    swal({
+      title: "Enviado!",
+      text: "Formulario enviado con exito",
+      icon: "success",
+      button: "Finalizar",
+    });
 
     setValues({ nombre: "", apellido: "", pais: "", dni: "" });
   }
@@ -97,7 +108,11 @@ const Form = () => {
       </div>
 
       <button type="submit" className="btn-primary">
-        Agregar Cita
+        Enviar
+      </button>
+
+      <button type="submit" className="btn-secundary">
+        Cancelar
       </button>
     </form>
   );
