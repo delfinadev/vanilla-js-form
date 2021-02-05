@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {useState, useEffect} from 'react'
+import './Form.css'
 
 const Form = () => {
     const [paises, setPaises] = useState([])
@@ -20,16 +21,16 @@ const Form = () => {
         <form onSubmit={eventPrevent} >
             <div className="column-one">
                 <label>Nombre<span>*</span>
-                    <input type="text" name="" id="nombre"/>
+                    <input type="text" name="nombre" id="nombre" required/>
                 </label> 
                 <label>
                 Seleccione un pais<span>*</span>
-                    <select id="pais">
+                    <select id="pais" name="pais "required>
                          {paises
                          .splice(0,20)
-                         .map(pais => 
+                         .map((pais,index) => 
                             {return (
-                             <option value={pais.name}>{pais.name}</option>
+                             <option value={pais.name} key={index}>{pais.name}</option>
                             )})}         
                      </select>
                 </label>
@@ -37,10 +38,10 @@ const Form = () => {
             
             <div className="column-two">
                 <label>Apellido<span>*</span>
-                    <input type="text" name="" id="apellido"/> 
+                    <input type="text" name="apellido" id="apellido" required/> 
                 </label> 
                 <label>Numero de documento<span>*</span>
-                    <input type="number" name="" id="documento"/>
+                    <input type="number" name="dni" id="documento" required/>
                 </label>
             </div>
 
