@@ -1,9 +1,8 @@
-import './App.css';
-import Navbar from './Components/Navbar'
-import Home from './containers/Home'
-import swal from 'sweetalert'
+import "./App.css";
+import Navbar from "./Components/Navbar";
+import Home from "./containers/Home";
 
-function App() {
+export default function App() {
   return (
     <div className="App">
       <Navbar />
@@ -11,5 +10,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
