@@ -1,3 +1,11 @@
-export default function Home() {
-  return <div></div>;
+import Form from '../Components/Form'
+
+const Home = () => {
+    return (
+        <div>
+            <Form />
+        </div>
+    )
 }
+
+export default Home
