@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import swal from "sweetalert";
+import './Form.css'
 
 const Form = () => {
   const [paises, setPaises] = useState([]);
@@ -17,6 +18,7 @@ const Form = () => {
     let url = "https://restcountries.eu/rest/v2/all";
     axios.get(url).then((response) => {
       setPaises(response.data);
+      console.log(response)
     });
   }, []);
 
@@ -59,6 +61,15 @@ const Form = () => {
     setValues({ nombre: "", apellido: "", pais: "", dni: "" });
   }
 
+  function handleCancel() {
+    setValues({
+      nombre: "",
+      apellido: "",
+      pais: "",
+      dni: ""
+    })
+    
+  }
   return (
     <form onSubmit={handleSubmit}>
       <div className="column-one">
@@ -71,16 +82,17 @@ const Form = () => {
             value={nombre}
           />
         </label>
-        <label>
+        <label className="label-pais">
           Seleccione un pais<span>*</span>
           <select id="pais" name="pais" onChange={handleOnChangeInputs}>
-            {paises.map((pais, index) => {
+            {paises
+            .map((pais, index) => {
               return (
                 <option key={index} value={pais.name}>
                   {pais.name}
                 </option>
               );
-            })}
+            }).splice(0, 20)}
           </select>
         </label>
       </div>
@@ -110,7 +122,7 @@ const Form = () => {
         Enviar
       </button>
 
-      <button type="submit" className="btn-secundary">
+      <button type="submit" className="btn-secundary" onClick={handleCancel}>
         Cancelar
       </button>
     </form>

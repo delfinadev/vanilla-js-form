@@ -1,0 +1,22 @@
+.home  {
+    background-color: #F3F3F4;
+    width: 100%;
+}
+
+.home h2{
+    margin: 0;
+    font-size: 16px;
+    padding: 50px 0 19px 43px;
+}
+
+.instructions{
+    font-size: 13px;
+    line-height: 15px;
+    color: #999999;
+    padding-top: 24px;
+    padding-left: 43px;
+}
+
+footer{
+    background-color: #fff;
+}
