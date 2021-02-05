@@ -4,14 +4,14 @@ import swal from "sweetalert";
 
 const Form = () => {
   const [paises, setPaises] = useState([]);
+
   const [values, setValues] = useState({
     nombre: "",
     apellido: "",
-    pais: "",
     dni: "",
   });
 
-  const [error, setError] = useState(false);
+  // const [error, setError] = useState(false);
 
   useEffect(() => {
     let url = "https://restcountries.eu/rest/v2/all";
@@ -20,49 +20,73 @@ const Form = () => {
     });
   }, []);
 
-  const { nombre, apellido, pais, dni } = values;
+  // const { nombre, apellido, pais, dni } = values;
 
-  function handleOnChange(event) {
-    [event.target.value] = event.target.value;
+  function handleOnChange(e) {
+    setValues({
+      ...values,
+      [e.target.value]: e.target.value,
+    });
   }
-  const handleSubmit = (event) => {
+
+  function handleSubmit(event) {
     event.preventDefault();
-    //Validar
-    if (
-      nombre.trim() === "" ||
-      apellido.trim() === "" ||
-      pais.trim() === "" ||
-      dni.trim() === ""
-    ) {
-      setError(true);
-      swal("Error!", " Agregaste  al carrito de compras!", "error");
-      return; //asi no se sigue ejecutando el form ya que hay error
-    }
-    setError(false);
-  };
+  }
 
   return (
     <form onSubmit={handleSubmit}>
       <div className="column-one">
-        <h3>
+        <label>
           Nombre<span>*</span>
-        </h3>
-        <input type="text" name="" id="" />
-        <h3>
+          <input
+            type="text"
+            name=""
+            id="nombre"
+            onChange={(e) => {
+              handleOnChange(e);
+            }}
+            // value={nombre}
+          />
+        </label>
+        <label>
           Seleccione un pais<span>*</span>
-        </h3>
-        <input type="select" name="" id="" />
+          <select id="pais">
+            {paises.splice(0, 20).map((pais, index) => {
+              return (
+                <option key={index} value={pais.name}>
+                  {pais.name}
+                </option>
+              );
+            })}
+          </select>
+        </label>
       </div>
 
       <div className="column-two">
-        <h3>
+        <label>
           Apellido<span>*</span>
-        </h3>
-        <input type="text" name="" id="" />
-        <h3>
+          <input
+            type="text"
+            name=""
+            id="apellido"
+            onChange={(e) => {
+              handleOnChange(e);
+            }}
+            // value={apellido}
+          />
+        </label>
+        <label>
           Numero de documento<span>*</span>
-        </h3>
-        <input type="number" name="" id="" />
+          <input
+            type="text"
+            name=""
+            id="documento"
+            onChange={(e) => {
+              handleOnChange(e);
+            }}
+            // value={dni}
+          />
+        </label>
       </div>
 
       <button type="submit" className="btn-primary">
