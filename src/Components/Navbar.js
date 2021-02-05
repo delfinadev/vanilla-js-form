@@ -20,12 +20,3 @@ export default function Navbar() {
     </div>
   );
 }
-
-const Bare = () => {
-  return (
-    <div>
-      <FaHome />
-      <FaUser />
-    </div>
-  );
-};
