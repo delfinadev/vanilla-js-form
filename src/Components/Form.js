@@ -1,56 +1,103 @@
-import axios from 'axios'
-import {useState, useEffect} from 'react'
-import './Form.css'
+import axios from "axios";
+import { useState, useEffect } from "react";
+import swal from "sweetalert";
 
 const Form = () => {
-    const [paises, setPaises] = useState([])
+  const [paises, setPaises] = useState([]);
 
-    useEffect(() => {
-        let url = 'https://restcountries.eu/rest/v2/all'
-        axios.get(url).then((response) => {
-            setPaises(response.data);
-          })
-    }, []);
+  const [values, setValues] = useState({
+    nombre: "",
+    apellido: "",
+    dni: "",
+  });
 
-    function eventPrevent(e){
-        e.preventDefault()
-    }
-    console.log(paises)
+  console.log(paises)
+  // const [error, setError] = useState(false);
 
-    return (
-        <form onSubmit={eventPrevent} >
-            <div className="column-one">
-                <label>Nombre<span>*</span>
-                    <input type="text" name="nombre" id="nombre" required/>
-                </label> 
-                <label>
-                Seleccione un pais<span>*</span>
-                    <select id="pais" name="pais "required>
-                         {paises
-                         .splice(0,20)
-                         .map((pais,index) => 
-                            {return (
-                             <option value={pais.name} key={index}>{pais.name}</option>
-                            )})}         
-                     </select>
-                </label>
-            </div>
-            
-            <div className="column-two">
-                <label>Apellido<span>*</span>
-                    <input type="text" name="apellido" id="apellido" required/> 
-                </label> 
-                <label>Numero de documento<span>*</span>
-                    <input type="number" name="dni" id="documento" required/>
-                </label>
-            </div>
+  useEffect(() => {
+    let url = "https://restcountries.eu/rest/v2/all";
+    axios.get(url).then((response) => {
+      setPaises(response.data);
+    });
+  }, []);
 
-            <div className="btn">
-                <input type="submit" value=""/>
-                <input type="submit" value=""/>
-            </div>
-        </form>
-    )
-}
+  // const { nombre, apellido, pais, dni } = values;
 
-export default Form
+  function handleOnChange(e) {
+    setValues({
+      ...values,
+      [e.target.value]: e.target.value,
+    });
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div className="column-one">
+        <label>
+          Nombre<span>*</span>
+          <input
+            type="text"
+            name="nombre"
+            id="nombre"
+            required
+            onChange={(e) => {
+              handleOnChange(e);
+            }}
+            // value={nombre}
+          />
+        </label>
+        <label>
+          Seleccione un pais<span>*</span>
+          <select id="pais" required>
+            {paises.splice(0, 20).map((pais, index) => {
+              return (
+                <option key={index} value={pais.name}>
+                  {pais.name}
+                </option>
+              );
+            })}
+          </select>
+        </label>
+      </div>
+
+      <div className="column-two">
+        <label>
+          Apellido<span>*</span>
+          <input
+            type="text"
+            name="apellido"
+            id="apellido"
+            required
+            onChange={(e) => {
+              handleOnChange(e);
+            }}
+            // value={apellido}
+          />
+        </label>
+        <label>
+          Numero de documento<span>*</span>
+          <input
+            type="text"
+            name="dni"
+            id="documento"
+            required
+            onChange={(e) => {
+              handleOnChange(e);
+            }}
+            // value={dni}
+          />
+        </label>
+      </div>
+
+      <button type="submit" className="btn-primary">
+        Agregar Cita
+      </button>
+    </form>
+  );
+};
+
+export default Form;
