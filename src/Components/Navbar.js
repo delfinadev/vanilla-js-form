@@ -1,13 +1,31 @@
+import { FaHome } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
+import "../Components/Navbar.css";
+
 export default function Navbar() {
   return (
-      <div className="navbar">
-          <div className="navbar-logos">
-              <img src="https://369969691f476073508a-60bf0867add971908d4f26a64519c2aa.ssl.cf5.rackcdn.com/logos/logo_epayco_400px.png" alt="epayco"/>
-              <span>En alianza con</span>
-              <img src="https://www.revistanovedadesdavivienda.com/wp-content/themes/novedades/logo-black.png" alt="davivienda"/>
-          </div>
-          <h3>ALEXANDER CEBA...</h3>
-          
-      </div>
-  )
+    <div className="navbar">
+      <img
+        src="https://tuwebonline.co/wp-content/uploads/2020/05/logoepayco.png"
+        alt="epayco"></img>{" "}
+      <br></br>
+      <p className="user">ALEXANDER CEBA...</p>
+      <p>
+        <FaHome /> Dashboard
+      </p>{" "}
+      <br></br>
+      <p>
+        <FaUser /> Clientes
+      </p>
+    </div>
+  );
 }
+
+const Bare = () => {
+  return (
+    <div>
+      <FaHome />
+      <FaUser />
+    </div>
+  );
+};

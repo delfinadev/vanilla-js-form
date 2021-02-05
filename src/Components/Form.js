@@ -4,15 +4,14 @@ import swal from "sweetalert";
 
 const Form = () => {
   const [paises, setPaises] = useState([]);
-
   const [values, setValues] = useState({
     nombre: "",
     apellido: "",
+    pais: "",
     dni: "",
   });
 
- 
-  // const [error, setError] = useState(false);
+  const [error, setError] = useState(false);
 
   useEffect(() => {
     let url = "https://restcountries.eu/rest/v2/all";
@@ -22,17 +21,32 @@ const Form = () => {
     });
   }, []);
 
-  // const { nombre, apellido, pais, dni } = values;
-
-  function handleOnChange(e) {
-    setValues({
-      ...values,
-      [e.target.value]: e.target.value,
-    });
+  function handleOnChangeInputs(event) {
+    setValues({ ...values, [event.target.name]: event.target.value });
   }
-  console.log(values)
+
+  const { nombre, apellido, pais, dni } = values;
+
   function handleSubmit(event) {
     event.preventDefault();
+
+    if (
+      nombre.trim() === "" ||
+      apellido.trim() === "" ||
+      pais === "" ||
+      dni.trim() === ""
+    ) {
+      setError(true);
+      swal("Error!", "Todos los campos son necesarios", "error");
+
+      return; //asi no se sigue ejecutando el form ya que hay error
+    }
+
+    //Eliminar el error
+    setError(false);
+    swal("Enviado!", "El fromulario se envio con exito", "success");
+
+    setValues({ nombre: "", apellido: "", pais: "", dni: "" });
   }
 
   return (
@@ -43,18 +57,14 @@ const Form = () => {
           <input
             type="text"
             name="nombre"
-            id="nombre"
-            required
-            onChange={(e) => {
-              handleOnChange(e);
-            }}
-            // value={nombre}
+            onChange={handleOnChangeInputs}
+            value={nombre}
           />
         </label>
         <label>
           Seleccione un pais<span>*</span>
-          <select id="pais" required>
-            {paises.splice(0, 20).map((pais, index) => {
+          <select id="pais" name="pais" onChange={handleOnChangeInputs}>
+            {paises.map((pais, index) => {
               return (
                 <option key={index} value={pais.name}>
                   {pais.name}
@@ -71,12 +81,8 @@ const Form = () => {
           <input
             type="text"
             name="apellido"
-            id="apellido"
-            required
-            onChange={(e) => {
-              handleOnChange(e);
-            }}
-            // value={apellido}
+            onChange={handleOnChangeInputs}
+            value={apellido}
           />
         </label>
         <label>
@@ -84,12 +90,8 @@ const Form = () => {
           <input
             type="text"
             name="dni"
-            id="documento"
-            required
-            onChange={(e) => {
-              handleOnChange(e);
-            }}
-            // value={dni}
+            onChange={handleOnChangeInputs}
+            value={dni}
           />
         </label>
       </div>
