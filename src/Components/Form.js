@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import swal from "sweetalert";
-import './Form.css'
+import "./Form.css";
 
 const Form = () => {
   const [paises, setPaises] = useState([]);
@@ -18,7 +18,7 @@ const Form = () => {
     let url = "https://restcountries.eu/rest/v2/all";
     axios.get(url).then((response) => {
       setPaises(response.data);
-      console.log(response)
+      console.log(response);
     });
   }, []);
 
@@ -66,66 +66,78 @@ const Form = () => {
       nombre: "",
       apellido: "",
       pais: "",
-      dni: ""
-    })
-    
+      dni: "",
+    });
   }
   return (
-    <form onSubmit={handleSubmit}>
-      <div className="column-one">
-        <label>
-          Nombre<span>*</span>
-          <input
-            type="text"
-            name="nombre"
-            onChange={handleOnChangeInputs}
-            value={nombre}
-          />
-        </label>
-        <label className="label-pais">
-          Seleccione un pais<span>*</span>
-          <select id="pais" name="pais" onChange={handleOnChangeInputs}>
-            {paises
-            .map((pais, index) => {
-              return (
-                <option key={index} value={pais.name}>
-                  {pais.name}
-                </option>
-              );
-            }).splice(0, 20)}
-          </select>
-        </label>
+    <>
+      <form>
+        <div className="container-fluid">
+          <div className="row ">
+            <label className="form-label col-12 col-md-6">
+              Nombre<span>*</span>
+              <input
+                className="form-inputs col-12 "
+                type="text"
+                name="nombre"
+                onChange={handleOnChangeInputs}
+                value={nombre}
+              />
+            </label>
+            <label className="form-label col-12 col-md-6">
+              Apellido<span>*</span>
+              <input
+                className="form-inputs col-12 "
+                type="text"
+                name="apellido"
+                onChange={handleOnChangeInputs}
+                value={apellido}
+              />
+            </label>
+            <label className="form-label col-12 col-md-6">
+              Seleccione un pais<span>*</span>
+              <select
+                id="pais"
+                name="pais"
+                onChange={handleOnChangeInputs}
+                className="inputs col-12 ">
+                {paises
+                  .map((pais, index) => {
+                    return (
+                      <option key={index} value={pais.name}>
+                        {pais.name}
+                      </option>
+                    );
+                  })
+                  .splice(0, 20)}
+              </select>
+            </label>
+
+            <label className="form-label col-12 col-md-6">
+              Numero de documento<span>*</span>
+              <input
+                className="form-inputs col-12 col-m-3"
+                type="text"
+                name="dni"
+                onChange={handleOnChangeInputs}
+                value={dni}
+              />
+            </label>
+          </div>
+        </div>
+      </form>
+      <div className="btn-container">
+        <button type="submit" className="btn-primary " onClick={handleSubmit}>
+          Enviar
+        </button>
+        <button
+          type="submit"
+          className="btn-secondary cancelar"
+          onClick={handleCancel}>
+          Cancelar
+        </button>
       </div>
-
-      <div className="column-two">
-        <label>
-          Apellido<span>*</span>
-          <input
-            type="text"
-            name="apellido"
-            onChange={handleOnChangeInputs}
-            value={apellido}
-          />
-        </label>
-        <label>
-          Numero de documento<span>*</span>
-          <input
-            type="text"
-            name="dni"
-            onChange={handleOnChangeInputs}
-            value={dni}
-          />
-        </label>
-      </div>
-
-      <button type="submit" className="btn-primary">
-        Enviar
-      </button>
-
-      <button type="submit" className="btn-secundary" onClick={handleCancel}>
-        Cancelar
-      </button>
-    </form>
+    </>
   );
 };
 
