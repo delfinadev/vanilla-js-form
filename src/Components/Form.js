@@ -11,22 +11,37 @@ const Form = () => {
           })
     }, []);
 
+    function eventPrevent(e){
+        e.preventDefault()
+    }
     console.log(paises)
 
     return (
-        <form >
+        <form onSubmit={eventPrevent} >
             <div className="column-one">
-                <h3>Nombre<span>*</span></h3>
-                <input type="text" name="" id=""/>  
-                <h3>Seleccione un pais<span>*</span></h3>
-                <input type="select" name="" id=""/> 
+                <label>Nombre<span>*</span>
+                    <input type="text" name="" id="nombre"/>
+                </label> 
+                <label>
+                Seleccione un pais<span>*</span>
+                    <select id="pais">
+                         {paises
+                         .splice(0,20)
+                         .map(pais => 
+                            {return (
+                             <option value={pais.name}>{pais.name}</option>
+                            )})}         
+                     </select>
+                </label>
             </div>
             
             <div className="column-two">
-                <h3>Apellido<span>*</span></h3>
-                <input type="text" name="" id=""/>  
-                <h3>Numero de documento<span>*</span></h3>
-                <input type="number" name="" id=""/>
+                <label>Apellido<span>*</span>
+                    <input type="text" name="" id="apellido"/> 
+                </label> 
+                <label>Numero de documento<span>*</span>
+                    <input type="number" name="" id="documento"/>
+                </label>
             </div>
 
             <div className="btn">
