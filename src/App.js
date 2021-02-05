@@ -1,6 +1,8 @@
-import "./App.css";
-import Navbar from "./Components/Navbar";
-import Home from "./containers/Home";
+import './App.css';
+import Navbar from './components/Navbar'
+import Home from './containers/Home'
+
+
 
 export default function App() {
   return (
